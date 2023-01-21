@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "tsc",
-    "dev": "nodemon -e ts --exec ts-node src/index.ts"
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon --experimental-modules dist/index.js\""
   },
   "author": "Noah Cardoza (Discord: MacHacker#7322)",
   "license": "MIT",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@antiadmin/anticaptchaofficial": "^1.0.13",
+    "concurrently": "^7.6.0",
     "console-log-level": "^1.4.1",
     "got": "^11.8.5",
     "hcaptcha-solver": "^1.0.2",

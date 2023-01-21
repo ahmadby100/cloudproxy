@@ -87,7 +87,7 @@ async function interceptResponse(page: Page, callback: (payload: ChallengeResolu
     let headers = e.responseHeaders || []
 
     let cookies = await page.cookies();
-    log.debug(cookies)
+    // log.debug(cookies)
 
     if (cookies.filter((c: Cookie) => c.name === 'cf_clearance').length > 0) {
       log.debug('Aborting request and return cookies. valid cookies found')
@@ -125,7 +125,7 @@ async function resolveChallenge(ctx: RequestContext, { url, maxTimeout, proxy, d
     log.debug("Apply proxy");
   }
 
-  log.debug(`Navigating to... ${url}`)
+  // log.debug(`Navigating to... ${url}`)
   let response = await page.goto(url, { waitUntil: 'domcontentloaded' })
 
   // look for challenge
@@ -330,28 +330,28 @@ async function setupPage(ctx: RequestContext, params: BaseRequestAPICall, browse
   }
 
   if (postData) {
-    log.debug(`Setting body data to ${postData}`)
+    // log.debug(`Setting body data to ${postData}`)
     overrideResolvers.postData = request => postData
   }
 
   if (userAgent) {
-    log.debug(`Using custom UA: ${userAgent}`)
+    // log.debug(`Using custom UA: ${userAgent}`)
     await page.setUserAgent(userAgent)
   }
 
   if (headers) {
-    log.debug(`Adding custom headers: ${JSON.stringify(headers, null, 2)}`,)
+    // log.debug(`Adding custom headers: ${JSON.stringify(headers, null, 2)}`,)
     overrideResolvers.headers = request => Object.assign(request.headers(), headers)
   }
 
   if (cookies) {
-    log.debug(`Setting custom cookies: ${JSON.stringify(cookies, null, 2)}`,)
+    // log.debug(`Setting custom cookies: ${JSON.stringify(cookies, null, 2)}`,)
     await page.setCookie(...cookies)
   }
 
   // if any keys have been set on the object
   if (Object.keys(overrideResolvers).length > 0) {
-    log.debug(overrideResolvers)
+    // log.debug(overrideResolvers)
     let callbackRunOnce = false
     const callback = (request: Request) => {
 
@@ -368,7 +368,7 @@ async function setupPage(ctx: RequestContext, params: BaseRequestAPICall, browse
         overrides[key] = overrideResolvers[key](request)
       });
 
-      log.debug(overrides)
+      // log.debug(overrides)
 
       request.continue(overrides)
     }

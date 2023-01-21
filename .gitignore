@@ -120,3 +120,6 @@ dist
 
 # Project Development
 testing/
+
+*.exe
+*.bat

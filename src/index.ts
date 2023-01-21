@@ -10,7 +10,7 @@ const serverHost: string = process.env.HOST || '0.0.0.0'
 
 function errorResponse(errorMsg: string, res: ServerResponse, startTimestamp: number) {
   log.error(errorMsg)
-  const response = {
+  const response = { 
     status: 'error',
     message: errorMsg,
     startTimestamp,
@@ -44,7 +44,7 @@ function successResponse(successMsg: string, extendedProperties: object, res: Se
 }
 
 function validateIncomingRequest(ctx: RequestContext, params: BaseAPICall) {
-  log.info(`Params: ${JSON.stringify(params)}`)
+  // log.info(`Params: ${JSON.stringify(params)}`) 
 
   if (ctx.req.method !== 'POST') {
     ctx.errorResponse('Only the POST method is allowed')
