@@ -118,6 +118,8 @@ export default {
   destroy: async (id: string): Promise<boolean> => {
     const { browser, userDataDir } = sessionCache[id]
     if (browser) {
+      let pages = await browser.pages();
+      await Promise.all(pages.map(page =>page.close()));
       await browser.close()
       delete sessionCache[id]
       if (userDataDir) {
